@@ -26,10 +26,10 @@ public class FutureValueCalculator {
         System.out.printf("The future value of the item is: $%.2f%n", futureValue);
         System.out.printf("The total interest earned is: $%.2f%n", totalInterest);
     }
-    public static double calculateFutureValue(double initalDeposit, double dailyInterestRate, double yearsinFuture){
+    public static double calculateFutureValue(double initialDeposit, double dailyInterestRate, double yearsinFuture){
         if (dailyInterestRate == 0) {
-            return initalDeposit + (initalDeposit * yearsinFuture);
+            return initialDeposit + (initialDeposit * yearsinFuture);
         }
-        return initalDeposit * Math.pow(1 + (dailyInterestRate / 100), 365 * yearsinFuture);
+        return initialDeposit * Math.pow(1 + (dailyInterestRate / 100), 365 * yearsinFuture);
     }
 }
