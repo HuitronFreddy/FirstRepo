@@ -50,6 +50,7 @@ public class Book {
         this.checkedOutTo = checkedOutTo;
     }
 
+    //Typically the constructor comes after the properties
     public void checkOut (){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your name: ");
@@ -73,6 +74,17 @@ public class Book {
         this.isCheckedOut = isCheckedOut;
         this.checkedOutTo = checkedOutTo;
     }
+
+    //You could do the constructor like this for less typing since you know in the beginning it won't be checked out
+    //and it's not checked out to anyone
+    public Book(int id, String isbn, String title) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.isCheckedOut = false;
+        this.checkedOutTo = "";
+    }
+
     public static void showAvailableBooks(Book[] books) {
         // lists all books in array
         for (Book book : books) {

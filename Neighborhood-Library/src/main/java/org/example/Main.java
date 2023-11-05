@@ -5,6 +5,12 @@ import java.util.Scanner;
 import static org.example.Book.showAvailableBooks;
 import static org.example.Book.showCheckedOutBooks;
 
+/*
+Really good job. It works well. Checking out and checking in is all functional.
+You broke things down into methods to make it easier to read and re-usable.
+It might be nice to allow the user to check out the book in the first menu rather
+than making them jump through an extra hoop. My only real advice is using a constructor for less typing
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,7 +21,8 @@ public class Main {
         books[1] = new Book(2, "0124", "Sapiens: A Brief History of Humankind", true, "Adam");
         books[2] = new Book(3, "0125", "The Road to Wigan Pier", true, "Jairo");
         books[3] = new Book(4, "0126", "TThe Silent Patient", true, "Aaryan");
-        books[4] = new Book(5, "0127", "Dune", false, "");
+        //This is where the constructor overload comes in handy
+        books[4] = new Book(5, "0127", "Dune");
         books[5] = new Book(6, "0128", "The Girl with the Dragon Tattoo", false, "");
         books[6] = new Book(7, "0129", "The Goldfinch", false, "");
         books[7] = new Book(8, "0133", "The Testaments", false, "");
