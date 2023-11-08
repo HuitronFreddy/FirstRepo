@@ -3,10 +3,20 @@ package org.example;
 import java.util.List;
 import java.util.Scanner;
 
+//Nice! You clearly understood that the UserInterface is only responsible
+//For displaying information and the dealership actually handles the information itself.
 public class UserInterface {
     Dealership dealership;
     public Dealership getDealership() {
         return dealership;
+    }
+
+    //Instead of allowing the user to hand off a dealership in the constructor
+    //You could consider making a private method that initializes the vehicle
+    //Or just do it in the constructor. For example:
+    public UserInterface(){
+        //This way you control how the dealership gets loaded.
+        this.dealership = DealershipFileManager.getDealership();
     }
     public UserInterface(Dealership dealership) {
         this.dealership = dealership;

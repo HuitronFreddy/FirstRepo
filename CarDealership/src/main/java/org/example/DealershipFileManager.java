@@ -10,6 +10,8 @@ public class DealershipFileManager {
     private static final String VEHICLES_FILE_PATH = "src/main/resources/Vehicles.csv";
 
     public static Dealership getDealership() {
+        //If you're adding the vehicle to the dealerships list of vehicles
+        //Why do you need the variable 'vehicleList'?
         List<Vehicle> vehicleList = new ArrayList<>();
         Dealership dealership = new Dealership(); // Create a new Dealership object
 
@@ -30,6 +32,8 @@ public class DealershipFileManager {
                         double price = Double.parseDouble(vehicle[7]);
 
                         Vehicle newVehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+                        //What does adding the car to this list actually do?
                         vehicleList.add(newVehicle);
 
                         dealership.addVehicle(newVehicle);
