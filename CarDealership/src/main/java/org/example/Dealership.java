@@ -3,6 +3,8 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.DealershipFileManager.saveVehicleToInventory;
+
 public class Dealership {
     private String name;
     private String address;
@@ -103,6 +105,16 @@ public class Dealership {
         }
         return filteredVehicles;
     }
+    public List<Vehicle> getVehicleByVin(int vin) {
+        List<Vehicle> filteredVehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVin() == vin) {
+                filteredVehicles.add(vehicle);
+                break;
+            }
+        }
+        return filteredVehicles;
+    }
 
     public List<Vehicle> getAllVehicles() {
         return inventory;
@@ -110,6 +122,7 @@ public class Dealership {
 
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
+        DealershipFileManager.saveVehicleToInventory(vehicle);
     }
 
     public void removeVehicle(Vehicle vehicle) {

@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class UserInterface {
     Dealership dealership;
@@ -27,6 +29,7 @@ public class UserInterface {
             System.out.println("7 - List ALL vehicles.");
             System.out.println("8 - Add a vehicle.");
             System.out.println("9 - Remove a vehicle.");
+            System.out.println("10 - Create Contract.");
             System.out.println("0 - Quit.");
             System.out.println("Please enter a number: ");
             int choice = scanner.nextInt();
@@ -58,6 +61,9 @@ public class UserInterface {
                     break;
                 case 9:
                     processRemoveVehicle();
+                    break;
+                case 10:
+                    processCreateContract();
                     break;
                 case 0:
                     System.exit(0);
@@ -199,5 +205,85 @@ public class UserInterface {
                 System.out.println(vehicle);
             }
         }
+    }
+    private void processCreateContract() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Select contract type:");
+        System.out.println("1 - Sales Contract");
+        System.out.println("2 - Lease Contract");
+        int contractTypeChoice = scanner.nextInt();
+
+        System.out.println("Enter customer name:");
+        String customerName = scanner.next();
+        System.out.println("Enter customer email:");
+        String customerEmail = scanner.next();
+
+        System.out.println("Select a vehicle from inventory by entering its VIN:");
+        displayFilteredVehicles(dealership.getAllVehicles());
+        int selectedVin = scanner.nextInt();
+
+        List<Vehicle> selectedVehicles = dealership.getVehicleByVin(selectedVin);
+
+        if (selectedVehicles.isEmpty()) {
+            System.out.println("No vehicle found with VIN " + selectedVin);
+            return;
+        }
+        Vehicle selectedVehicle = selectedVehicles.get(0);
+
+        switch (contractTypeChoice) {
+            case 1:
+                processCreateSalesContract(customerName, customerEmail, selectedVehicle);
+                break;
+            case 2:
+                processCreateLeaseContract(customerName, customerEmail, selectedVehicle);
+                break;
+            default:
+                System.out.println("Invalid contract type choice.");
+        }
+    }
+    private void processCreateSalesContract(String customerName, String customerEmail, Vehicle vehicle) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter sales tax amount (5%):");
+        double salesTaxAmount = scanner.nextDouble();
+        System.out.println("Enter recording fee ($100):");
+        double recordingFee = scanner.nextDouble();
+        System.out.println("Enter processing fee ($295 under $10,000, else $495) :");
+        double processingFee = scanner.nextDouble();
+        System.out.println("Enter finance option (true/false):");
+        boolean financeOption = scanner.nextBoolean();
+
+        SalesContract salesContract = new SalesContract(
+                getCurrentDate(), customerName, customerEmail, vehicle,
+                salesTaxAmount, recordingFee, processingFee, financeOption
+        );
+
+        dealership.removeVehicle(vehicle);
+        ContractDataManager.saveContract(salesContract);
+        System.out.println("Sales Contract created and vehicle removed from inventory.\n");
+    }
+
+    private void processCreateLeaseContract(String customerName, String customerEmail, Vehicle vehicle) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter expected ending value:");
+        double expectedEndingValue = scanner.nextDouble();
+        System.out.println("Enter lease fee:");
+        double leaseFee = scanner.nextDouble();
+
+        LeaseContract leaseContract = new LeaseContract(
+                getCurrentDate(), customerName, customerEmail, vehicle,
+                expectedEndingValue, leaseFee
+        );
+
+        dealership.removeVehicle(vehicle);
+        ContractDataManager.saveContract(leaseContract);
+        System.out.println("Lease Contract created and vehicle removed from inventory.\n");
+    }
+
+    private String getCurrentDate() {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDate.format(formatter);
+
+        return formattedDate;
     }
 }
