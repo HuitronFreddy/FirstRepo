@@ -8,9 +8,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ContractDataManager {
-
+    
     private static final Path CONTRACTS_FILE_PATH = Paths.get("src", "main", "resources", "Contract.csv");
-
+    
+//method uses instance of to create a contract between two types
     public static void saveContract(Contract contract) {
         try {
             List<String> lines = Files.readAllLines(CONTRACTS_FILE_PATH);
@@ -36,6 +37,7 @@ public class ContractDataManager {
             throw new RuntimeException(ex);
         }
     }
+    //methods to save contracts to Contract.csv
     private static void saveSalesContract(SalesContract contract, FileWriter writer) throws IOException {
         writer.write("Sales Contract\n");
         writer.write("Date: " + contract.getDate() + '\n');
