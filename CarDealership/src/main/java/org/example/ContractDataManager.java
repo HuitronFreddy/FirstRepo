@@ -41,7 +41,7 @@ public class ContractDataManager {
         writer.write("Date: " + contract.getDate() + '\n');
         writer.write("Customer Name: " + contract.getCustomerName() + '\n');
         writer.write("Customer Email: " + contract.getCustomerEmail() + '\n');
-        writer.write("Vehicle: " + contract.getVehicleSold().getVin() + '\n'); // Assuming getVIN method exists
+        writer.write("Vehicle: " + contract.getVehicleSold().getVin() + '\n'); 
         writer.write("Total Price: " + contract.getTotalPrice() + '\n');
         writer.write("Monthly Payment: " + contract.getMonthlyPayment() + '\n');
         writer.write("Sales Tax Amount: " + contract.getSalesTaxAmount() + '\n');
@@ -54,7 +54,7 @@ public class ContractDataManager {
         writer.write("Date: " + contract.getDate() + '\n');
         writer.write("Customer Name: " + contract.getCustomerName() + '\n');
         writer.write("Customer Email: " + contract.getCustomerEmail() + '\n');
-        writer.write("Vehicle: " + contract.getVehicleSold().getVin() + '\n'); // Assuming getVIN method exists
+        writer.write("Vehicle: " + contract.getVehicleSold().getVin() + '\n'); 
         writer.write("Total Price: " + contract.getTotalPrice() + '\n');
         writer.write("Monthly Payment: " + contract.getMonthlyPayment() + '\n');
         writer.write("Expected Ending Value: " + contract.getExpectedEndingValue() + '\n');
